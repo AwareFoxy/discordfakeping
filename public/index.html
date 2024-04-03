@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Ping Overlay Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rambla:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/DZy3LyZg/grinning-face-with-smiling-eyes-1f601.png">
+    <meta property="og:title" content="Icon Ping Overlay Tool" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="discord, discord server, icon, ping, overlay, tool, prank, fake ping, april fools">
+    <meta name="author" content="Krenich">
+    <meta name = "description" content = "Add a ping overlay to your discord server icon using this simple tool, perfect for a prank!" />
+    <meta name = "revised" content = "2024/04/01" />
+</head>
+<body>
+    <div class="main-content">
+        <h1 id="title">Add a Ping Overlay to a Server Icon: 😁</h1>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="iconFile" accept="image/png, image/jpeg" required>
+            <input type="submit" id="uploadBtn" value="Upload">
+        </form>
+        <div id="resultHolder"></div>
+    </div>
+    <footer class="footer">
+        <div class="col1">
+            <a href="https://discord.gg/pnfYAMSBND" target="_blank">
+                <i class="fa-brands fa-discord"></i>
+            </a>
+            <a href="https://www.instagram.com/kren1ch/" target="_blank">
+                <i id="instagram" class="fa-brands fa-instagram"></i>
+            </a>
+        </div>
+        <div class="col2">
+            <h2>Krenich 🤙</h3>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/9abe29d3f9.js" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById("uploadForm").addEventListener("submit", async function(event) 
+        {
+            // event.preventDefault();
+            // // Disable the upload button
+            // var uploadBtn = document.getElementById("uploadBtn");
+            // uploadBtn.disabled = true;
+
+            // try {
+            //     console.log("Request Pending...");
+                
+            //     const response = await fetch("/upload", {
+            //         method: "POST"
+            //     });
+
+            //     if (!response.ok) {
+            //         // Handle error here
+            //         console.log("Error in /upload request:", response.statusText);
+            //         // Enable the upload button after response
+            //         uploadBtn.disabled = false;
+            //         return;
+            //     }
+
+            //     const htmlContent = await response.text();
+
+            //     // Display the HTML content
+            //     var resultHolder = document.getElementById("resultHolder");
+            //     resultHolder.innerHTML = htmlContent;
+            // } catch (error) {
+            //     console.error("Error:", error);
+            //     // Ensure the upload button is enabled in case of error
+            //     uploadBtn.disabled = false;
+            // }
+
+            event.preventDefault();
+
+            // Disable the upload button
+            var uploadBtn = document.getElementById("uploadBtn");
+            uploadBtn.disabled = true;
+            
+            // Create FormData object and append file to it
+            var formData = new FormData();
+            formData.append("icon", document.getElementById("iconFile").files[0]);
+
+            try {
+                console.log("Request Pending...");
+                
+                const response = await fetch("/upload", {
+                    method: "POST",
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    console.log("Error in /upload request:", response.statusText);
+                    uploadBtn.disabled = false;
+                    return;
+                }
+
+                const blob = await response.blob();
+
+                uploadBtn.disabled = false;
+
+                var existingImg = document.getElementById("resultImg");
+                if (existingImg) {
+                    existingImg.remove();
+                }
+
+                var img = document.createElement("img");
+                img.id = "resultImg";
+                img.src = URL.createObjectURL(blob);
+
+                var existingDiv = document.getElementById("resultHolder");
+                existingDiv.appendChild(img)
+
+                var link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'modified_image.png';
+                link.click();
+            } catch (error) {
+                console.error("Errors:", error);
+                uploadBtn.disabled = false;
+            }
+            
+        });
+    </script>
+</body>
+</html>

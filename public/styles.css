@@ -1,0 +1,129 @@
+:root
+{
+    --light: #F2EEB3;
+    --dark: #17575e;
+    --light_dark: #55CCD9;
+    --pink: #F2B33D;
+    --brown: #401612;
+}
+
+
+*
+{
+
+    font-family: "Rambla", sans-serif;
+    font-size: large;
+}
+body {
+    background-color: var(--light);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+input[type="file"]::file-selector-button {
+    margin-right: 13px;
+    border: none;
+    background-color: var(--dark);
+    padding: 10px;
+    border-radius: 6px;
+    color: var(--light_dark);
+    cursor: pointer;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#title {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 28px;
+    color: var(--dark);
+}
+
+#uploadForm {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--light_dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#iconFile {
+    border: none;
+    color: var(--dark);
+    padding: 8px 20px;
+}
+
+#uploadBtn {
+    background: transparent;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 20px;
+    border: 3px solid var(--dark);
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+#uploadBtn:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+#resultHolder
+{
+    border-radius: 30%;
+    margin-bottom: 30px;
+    margin-top: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Optional: Adds a subtle shadow to images */
+    width: 500px;
+    height: 500px;
+    background-color: var(--pink);
+}
+#resultHolder img
+{
+    border-radius: 30%;
+}
+.footer {   
+    background-color: var(--pink);
+    color: whitesmoke;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.footer .col1 {
+    display: flex;
+    gap: 15px;
+    margin-right: auto;
+}
+#instagram
+{
+    font-size: 35px !important;
+}
+
+.footer .col1 a i {
+    color: var(--light);
+    font-size: 30px;
+}
+
+.footer .col2 {
+    flex-grow: 1;
+    text-align: right; 
+}
+
+.footer .col2 h2 {
+    margin: 0;
+    color: var(--light);
+    font-size: 25px !important;
+}
+
+
+
