@@ -12,6 +12,10 @@ const upload = multer({ dest: os.tmpdir() });
 app.use(express.static("public"));
 app.use(express.json());
 
+app.get('/sitemap.xml', function(req, res) {
+    res.sendFile('public/sitemap.xml');
+});
+
 app.post('/upload', upload.single('icon'), async (req, res) => {
     try {
         if (!req.file) {
